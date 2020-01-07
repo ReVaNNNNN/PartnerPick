@@ -5,18 +5,18 @@
     <title>PartnerPick</title>
 </head>
 <body>
-    <div class="container">
-        <header class="row">
-            @include('partials.header')
-        </header>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                @include('partials.header')
 
-        <div id="main" class="row">
-            @yield('content')
+                @yield('content')
+
+                @include('partials.footer')
+
+                @include('partials.footer_scripts')
+            </div>
         </div>
-
-        <footer class="row">
-            @include('partials.footer')
-        </footer>
     </div>
 </body>
 </html>
