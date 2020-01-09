@@ -14,6 +14,12 @@
             <a class="nav-link" href="#">
                 @lang('header_nav.contact')
             </a>
+            <a class="nav-link" href="#">
+                PL
+            </a>
+            <a class="nav-link" href="#">
+                EN
+            </a>
         </nav>
     </div>
 </div>
