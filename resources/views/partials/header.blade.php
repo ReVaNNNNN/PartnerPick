@@ -14,10 +14,10 @@
             <a class="nav-link" href="#">
                 @lang('header_nav.contact')
             </a>
-            <a class="nav-link" href="#">
+            <a class="nav-link lang {{ setActive('pl', 'lang-active') }}" href="{{ url('locale/pl') }}">
                 PL
             </a>
-            <a class="nav-link" href="#">
+            <a class="nav-link lang {{ setActive('en', 'lang-active') }}" href="{{ url('locale/en') }}">
                 EN
             </a>
         </nav>

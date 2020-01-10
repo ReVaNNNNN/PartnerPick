@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl">
+<html lang="{{ app()->getLocale() }}">
 <head>
     @include('partials.head')
     <title>PartnerPick</title>

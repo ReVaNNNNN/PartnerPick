@@ -135,6 +135,14 @@ body {
     }
 }
 
+a.nav-link.lang,
+a.nav-link.lang:hover {
+    border: none;
+}
+
+a.nav-link.lang.lang-active {
+    color: $base-color;
+}
 
 /*
  * Cover

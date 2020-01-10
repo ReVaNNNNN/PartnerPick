@@ -27,10 +27,4 @@
             </a>
         </p>
     </div>
-{{--
-   * ostylowanie tooltipa: https://www.w3schools.com/css/css_tooltip.asp
-   * zmiana jezyka w menu PL/EN
-   * dodać linki do hrefa przycisków
---}}
-
 @endsection
