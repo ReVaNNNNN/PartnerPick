@@ -29,7 +29,6 @@
     </div>
 {{--
    * ostylowanie tooltipa: https://www.w3schools.com/css/css_tooltip.asp
-   * powiększanie przycisku na hover
    * zmiana jezyka w menu PL/EN
    * dodać linki do hrefa przycisków
 --}}
