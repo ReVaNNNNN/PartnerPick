@@ -13,4 +13,5 @@
 
 
 Route::get('/', 'IndexController@index');
+Route::get('/locale/{locale}', 'LocaleController@index');
 
