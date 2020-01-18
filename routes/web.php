@@ -17,6 +17,8 @@
 Route::get('/', 'IndexController@index');
 Route::get('/locale/{locale}', 'LocaleController@index');
 
+Route::get('/test', 'TestController@index');
+
 /**
  * Drawning Routes
  */
