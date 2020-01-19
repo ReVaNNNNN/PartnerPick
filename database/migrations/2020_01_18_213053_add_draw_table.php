@@ -15,8 +15,11 @@ class AddDrawTable extends Migration
     {
         Schema::create('draw', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('name');
+            $table->string('name');
             $table->timestamps();
+
+            $table->foreign('id')->references('draw_id')->on('draw_person_to_draw')->onDelete('cascade');
+            $table->foreign('id')->references('draw_id')->on('draw_result')->onDelete('cascade');
         });
     }
 
