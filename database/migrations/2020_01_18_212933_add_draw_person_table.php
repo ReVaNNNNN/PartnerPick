@@ -15,12 +15,11 @@ class AddDrawPersonTable extends Migration
     {
         Schema::create('draw_person', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('draw_id')->unsigned();;
             $table->string('name');
             $table->timestamps();
 
-            $table->foreign('id')->references('draw_person_id')->on('draw_person_to_draw')->onDelete('cascade');
-            $table->foreign('id')->references('first_person_id')->on('draw_result')->onDelete('cascade');
-            $table->foreign('id')->references('second_person_id')->on('draw_result')->onDelete('cascade');
+            $table->foreign('draw_id')->references('id')->on('draw')->onDelete('cascade');
         });
     }
 

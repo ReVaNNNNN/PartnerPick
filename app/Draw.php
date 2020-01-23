@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Draw extends Model
 {
@@ -11,19 +13,19 @@ class Draw extends Model
     protected $table = 'draw';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return HasMany
      */
-    public function drawPersons()
+    public function persons(): HasMany
     {
-        return $this->belongsToMany(DrawPersonDraw::class, 'draw_id');
+        return $this->hasMany(DrawPerson::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return HasOne
      */
-    public function drawResult()
+    public function result(): HasOne
     {
-        return $this->belongsToMany(DrawResult::class, 'draw_id');
+        return $this->hasOne(DrawResult::class);
     }
 
     /**

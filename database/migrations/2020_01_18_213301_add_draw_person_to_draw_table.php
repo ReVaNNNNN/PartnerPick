@@ -13,15 +13,7 @@ class AddDrawPersonToDrawTable extends Migration
      */
     public function up()
     {
-        Schema::create('draw_person_to_draw', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('draw_id')->unsigned();
-            $table->integer('draw_person_id')->unsigned();
-            $table->timestamps();
-
-            $table->foreign('draw_id')->references('id')->on('draw')->onDelete('cascade');
-            $table->foreign('draw_person_id')->references('id')->on('draw_person')->onDelete('cascade');
-        });
+       //Table has been removed.
     }
 
     /**

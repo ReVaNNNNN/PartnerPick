@@ -11,33 +11,22 @@ class TestController extends Controller
 {
     public function index()
     {
-        // $personOne = new DrawPerson();
-        // $personOne->name = 'Kamil';
-        // $personOne->save();
-        //
-        // $personTwo = new DrawPerson();
-        // $personTwo->name = 'Jakub';
-        // $personTwo->save();
-        //
-        // $draw = new Draw();
-        // $draw->name = 'pair';
-        // $draw->save();
-        //
-        // $drawCon = new DrawPersonDraw();
-        // $drawCon->draw_person_id = $personOne->getId();
-        // $drawCon->draw_id = $draw->getId();
-        // $drawCon->save();
-        //
-        // $drawCon = new DrawPersonDraw();
-        // $drawCon->draw_person_id = $personTwo->getId();
-        // $drawCon->draw_id = $draw->getId();
-        // $drawCon->save();
+//        $draw = new Draw();
+//        $draw->type = 'pair';
+//        $draw->save();
+//
+//        $personOne = new DrawPerson();
+//        $personOne->name = 'Kamil';
+//        $personOne->draw_id = $draw->getId();
+//        $personOne->save();
+//
+//        $personTwo = new DrawPerson();
+//        $personTwo->name = 'Jakub';
+//        $personTwo->draw_id = $draw->getId();
+//        $personTwo->save();
 
+        $draw = Draw::find(1);
 
-        // $drawCon = DrawPersonDraw::find(4);
-        // dd($drawCon->person()->first()->getId());
-        $person = DrawPerson::find(1);
-
-        var_dump($person->draw);
+        dd($draw->persons()->get());
     }
 }
