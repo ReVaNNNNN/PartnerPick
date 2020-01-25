@@ -4,16 +4,23 @@ namespace Libraries\Draw\Service;
 
 use Libraries\Draw\Dto\DrawDtoInterface;
 
-class Drawer
+class Drawer implements DrawerInterface
 {
-    public function __construct(DrawDtoInterface $data)
-    {
+    /**
+     * @var DrawDtoInterface
+     *
+     * @return void
+     */
+    private $data;
 
+    public function completeDrawData(DrawDtoInterface $drawDto): void
+    {
+        $this->data = $drawDto;
     }
 
     private function notNamedYet()
     {
-        $this->algorithm = new PairDrawAlgorithm($this->getData());
+        $this->algorithm = new PairDrawAlgorithm($this->data);
 
         $result = $this->algorithm()->draw();
     }
