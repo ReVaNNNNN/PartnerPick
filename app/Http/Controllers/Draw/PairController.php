@@ -4,28 +4,34 @@ namespace App\Http\Controllers\Draw;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PairRequest;
-use Libraries\Draw\Service\Drawer;
+use Illuminate\View\View;
+use Libraries\Draw\Factory\DrawFactoryInterface;
+use Libraries\Draw\Service\DrawerInterface;
 
 class PairController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         return view('content.pair');
     }
 
-    public function draw(PairRequest $request)
+    /**
+     * @param PairRequest $request
+     * @param DrawerInterface $drawer
+     * @param DrawFactoryInterface $factory
+     *
+     * @return View
+     */
+    public function draw(PairRequest $request, DrawerInterface $drawer, DrawFactoryInterface $factory): View // uzupełnić DI
     {
         $data = $request->all();
+        $pairDTO = $factory->create($data);
 
-        $pairFactory = new PairDrawDTO($data);
-        $pairDrawDTO = $pairFactory->create();
+        $drawer->completeDrawData($pairDTO);
 
-        // to wszysztko zahermetyzowac do jakieś klasy która przyjmie typ algorytmu i dane i na tej podstawie zwróci wynik
-        $drawer = new Drawer($pairDrawDTO); // Fabryka to tworzenia drawera ? z requesta pobieraniu typu losowania
-        // i na tej podstawie zapisywanie własciwego algorytmu w obiekcie
-
-
-
-        return $drawer->getResult();
+        return view('content.pair')->with(['result', $drawer->getResult()]);
     }
 }
