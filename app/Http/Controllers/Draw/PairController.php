@@ -27,11 +27,16 @@ class PairController extends Controller
      */
     public function draw(PairRequest $request, DrawerInterface $drawer, DrawFactoryInterface $factory): View // uzupełnić DI
     {
-        $data = $request->all();
+        dd($data = $request->all());
         $pairDTO = $factory->create($data);
 
         $drawer->completeDrawData($pairDTO);
 
         return view('content.pair')->with(['result', $drawer->getResult()]);
+    }
+
+    public function result()
+    {
+        
     }
 }
