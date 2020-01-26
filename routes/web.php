@@ -12,16 +12,29 @@
 */
 
 /**
- * Basic Routes
+|--------------------------------------------------------------------------
+| Basic Routes
+|--------------------------------------------------------------------------
  */
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'IndexController@index');
 Route::get('/locale/{locale}', 'LocaleController@index');
 
 Route::get('/test', 'TestController@index');
 
 /**
- * Drawning Routes
+|--------------------------------------------------------------------------
+| Drawing Routes
+|--------------------------------------------------------------------------
  */
-Route::get('/pair', 'Draw\PairController@index')->name('pair');
+Route::prefix('pair')->group(function () {
+    Route::get('/', 'Draw\PairController@index')->name('pair');
+    Route::post('/draw', 'Draw\PairController@draw')->name('pair-draw');
+    Route::get('/result', 'Draw\PairController@result')->name('pair-result');
+});
+
+
 Route::get('/draw-list', 'Draw\DrawListController@index')->name('draw-list');
 Route::get('/partner-assign', 'Draw\PartnerAssignController@index')->name('partner-assign');
