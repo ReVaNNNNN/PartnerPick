@@ -2,6 +2,7 @@
 
 namespace Libraries\Draw\Service;
 
+use App\Models\DrawResult;
 use Libraries\Draw\Dto\DrawDtoInterface;
 
 class Drawer implements DrawerInterface
@@ -23,5 +24,10 @@ class Drawer implements DrawerInterface
         $this->algorithm = new PairDrawAlgorithm($this->data);
 
         $result = $this->algorithm()->draw();
+    }
+
+    public function getResult(): DrawResult
+    {
+
     }
 }

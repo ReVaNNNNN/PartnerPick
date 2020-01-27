@@ -11,6 +11,27 @@ use Libraries\Draw\Service\DrawerInterface;
 class PairController extends Controller
 {
     /**
+     * @var DrawerInterface
+     */
+    protected $drawer;
+    /**
+     * @var DrawFactoryInterface
+     */
+    protected $factory;
+
+    /**
+     * PairController constructor.
+     *
+     * @param DrawerInterface $drawer
+     * @param DrawFactoryInterface $factory
+     */
+    public function __construct(DrawerInterface $drawer, DrawFactoryInterface $factory)
+    {
+        $this->drawer = $drawer;
+        $this->factory = $factory;
+    }
+
+    /**
      * @return View
      */
     public function index(): View
@@ -20,23 +41,21 @@ class PairController extends Controller
 
     /**
      * @param PairRequest $request
-     * @param DrawerInterface $drawer
-     * @param DrawFactoryInterface $factory
      *
      * @return View
      */
-    public function draw(PairRequest $request, DrawerInterface $drawer, DrawFactoryInterface $factory): View // uzupełnić DI
+    public function draw(PairRequest $request): View
     {
         dd($data = $request->all());
-        $pairDTO = $factory->create($data);
+        $pairDTO = $this->factory->create($data);
 
-        $drawer->completeDrawData($pairDTO);
+        $this->drawer->completeDrawData($pairDTO);
 
-        return view('content.pair')->with(['result', $drawer->getResult()]);
+        return view('content.pair')->with(['result', $this->drawer->getResult()]);
     }
 
     public function result()
     {
-        
+
     }
 }
