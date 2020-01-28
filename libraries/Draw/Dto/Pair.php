@@ -5,8 +5,21 @@ namespace Libraries\Draw\Dto;
 
 class Pair implements DrawDtoInterface
 {
-    public function __construct(array $data)
-    {
+    /**
+     * @var array
+     */
+    private $names;
 
+    public function __construct(array $names)
+    {
+        $this->names = $names;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNames(): array
+    {
+        return $this->names;
     }
 }

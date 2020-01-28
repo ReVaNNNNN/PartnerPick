@@ -2,7 +2,14 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Draw\PairController;
 use Illuminate\Support\ServiceProvider;
+use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
+use Libraries\Draw\Algorithm\Pair;
+use Libraries\Draw\Factory\DrawFactoryInterface;
+use Libraries\Draw\Factory\PairFactory;
+use Libraries\Draw\Service\Drawer;
+use Libraries\Draw\Service\DrawerInterface;
 
 class ControllerServiceProvider extends ServiceProvider
 {
@@ -13,7 +20,15 @@ class ControllerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(DrawerInterface::class, Drawer::class);
+
+        $this->app->when(PairController::class)
+            ->needs(DrawFactoryInterface::class)
+            ->give(PairFactory::class);
+
+        $this->app->when(PairController::class)
+            ->needs(DrawAlgorithmInterface::class)
+            ->give(Pair::class);
     }
 
     /**
@@ -23,14 +38,6 @@ class ControllerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(
-            'Libraries\Draw\Service\DrawerInterface',
-            'Libraries\Draw\Service\Drawer'
-        );
 
-        $this->app->bind(
-            'Libraries\Draw\Factory\DrawFactoryInterface',
-            'Libraries\Draw\Factory\PairFactory'
-        );
     }
 }

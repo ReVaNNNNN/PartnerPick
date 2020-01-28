@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Draw;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PairRequest;
 use Illuminate\View\View;
+use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
 use Libraries\Draw\Factory\DrawFactoryInterface;
 use Libraries\Draw\Service\DrawerInterface;
 
@@ -18,17 +19,23 @@ class PairController extends Controller
      * @var DrawFactoryInterface
      */
     protected $factory;
+    /**
+     * @var DrawAlgorithmInterface
+     */
+    protected $algorithm;
 
     /**
      * PairController constructor.
      *
      * @param DrawerInterface $drawer
      * @param DrawFactoryInterface $factory
+     * @param DrawAlgorithmInterface $algorithm
      */
-    public function __construct(DrawerInterface $drawer, DrawFactoryInterface $factory)
+    public function __construct(DrawerInterface $drawer, DrawFactoryInterface $factory, DrawAlgorithmInterface $algorithm)
     {
         $this->drawer = $drawer;
         $this->factory = $factory;
+        $this->algorithm = $algorithm;
     }
 
     /**
@@ -46,10 +53,11 @@ class PairController extends Controller
      */
     public function draw(PairRequest $request): View
     {
-        dd($data = $request->all());
-        $pairDTO = $this->factory->create($data);
+        dd($names = $request->all());
+        $pairDTO = $this->factory->create($names);
 
         $this->drawer->completeDrawData($pairDTO);
+        $this->drawer->setUpAlgorithm($this->algorithm);
 
         return view('content.pair')->with(['result', $this->drawer->getResult()]);
     }
