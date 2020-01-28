@@ -3,6 +3,7 @@
 namespace Libraries\Draw\Service;
 
 use App\Models\DrawResult;
+use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
 use Libraries\Draw\Dto\DrawDtoInterface;
 
 class Drawer implements DrawerInterface
@@ -13,21 +14,29 @@ class Drawer implements DrawerInterface
      * @return void
      */
     private $data;
+    /**
+     * @var DrawAlgorithmInterface
+     */
+    private $algorithm;
 
+    /**
+     * @param DrawDtoInterface $drawDto
+     */
     public function completeDrawData(DrawDtoInterface $drawDto): void
     {
         $this->data = $drawDto;
     }
 
-    private function notNamedYet()
+    /**
+     * @param DrawAlgorithmInterface $algorithm
+     */
+    public function setUpAlgorithm(DrawAlgorithmInterface $algorithm): void
     {
-        $this->algorithm = new PairDrawAlgorithm($this->data);
-
-        $result = $this->algorithm()->draw();
+        $this->algorithm = $algorithm;
     }
 
     public function getResult(): DrawResult
     {
-
+        return $this->algorithm->setUpData($this->data)->draw();
     }
 }
