@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Draw;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PairRequest;
+use App\Models\Draw;
+use App\Models\DrawPerson;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
 use Libraries\Draw\Factory\DrawFactoryInterface;
 use Libraries\Draw\Service\DrawerInterface;
+use Psr\Log\LogLevel;
 
 class PairController extends Controller
 {
@@ -50,14 +54,34 @@ class PairController extends Controller
      * @param PairRequest $request
      *
      * @return View
+     * @throws \Exception
      */
     public function draw(PairRequest $request): View
     {
-        dd($names = $request->all());
-        $pairDTO = $this->factory->create($names);
+        try {
+            // REFAKTOR
+            $names = $request->get('names');
 
-        $this->drawer->completeDrawData($pairDTO);
-        $this->drawer->setUpAlgorithm($this->algorithm);
+            $draw = new Draw();
+            $draw->setType(Draw::TYPE_PAIR);
+            $draw->save();
+            $drawId= $draw->getId();
+
+            foreach ($names as $name) {
+                $person = new DrawPerson();
+                $person->setName($name);
+                $person->setDrawId($drawId);
+                $person->save();
+            }
+
+
+            $pairDTO = $this->factory->create($names, $drawId);
+
+            $this->drawer->completeDrawData($pairDTO);
+            $this->drawer->setUpAlgorithm($this->algorithm);
+        } catch (\Exception $e) {
+            Log::log(LogLevel::ERROR, $e->getMessage());
+        }
 
         return view('content.pair')->with(['result', $this->drawer->getResult()]);
     }

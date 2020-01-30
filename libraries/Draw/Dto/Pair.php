@@ -9,10 +9,15 @@ class Pair implements DrawDtoInterface
      * @var array
      */
     private $names;
+    /**
+     * @var int
+     */
+    private $drawId;
 
-    public function __construct(array $names)
+    public function __construct(array $names, int $drawId)
     {
         $this->names = $names;
+        $this->drawId = $drawId;
     }
 
     /**
@@ -21,5 +26,13 @@ class Pair implements DrawDtoInterface
     public function getNames(): array
     {
         return $this->names;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDrawId(): int
+    {
+        return $this->drawId;
     }
 }

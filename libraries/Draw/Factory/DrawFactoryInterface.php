@@ -8,7 +8,9 @@ interface DrawFactoryInterface
 {
     /**
      * @param array $data
+     * @param int $drawId
+     *
      * @return DrawDtoInterface
      */
-    public function create(array $data): DrawDtoInterface;
+    public function create(array $data, int $drawId): DrawDtoInterface;
 }
