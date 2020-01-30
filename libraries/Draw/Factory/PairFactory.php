@@ -8,13 +8,16 @@ use Libraries\Draw\Dto\Pair;
 class PairFactory implements DrawFactoryInterface
 {
     /**
-     * @param array $data
+     * @param array $names
+     * @param int $drawId
+     *
      * @return DrawDtoInterface
      */
-    public function create(array $names): DrawDtoInterface
+    public function create(array $names, int $drawId): DrawDtoInterface
     {
         return new Pair(
-            $names
+            $names,
+            $drawId
         );
     }
 }
