@@ -59,7 +59,7 @@ class PairController extends Controller
     public function draw(PairRequest $request): View
     {
         try {
-            $names = $request->get('names');
+            $names = $request->get('names'); // Walidacja - muszą być co najmniej 3 imiona
             $drawId = $this->storeDraw()->getId();
 
             $this->storePersons($names, $drawId);

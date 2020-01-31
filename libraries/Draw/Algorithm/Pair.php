@@ -74,9 +74,26 @@ class Pair implements DrawAlgorithmInterface
 
     private function formatResult(Collection $resultCollection): Collection
     {
-        //@todo zformatowanie wyniku w taki sposób aby dane były uporządkowane w tablicy
-        // według par osoba1: osoba3, osoba2:osoba1, osoba3:osoba2 itp
+        //@todo Refaktor
 
-        return $resultCollection;
+        $newCollection = new Collection();
+        $size = $resultCollection->count();
+
+        for ($i = 0; $i < $size; $i++) {
+            if (($size - 1) === $i) {
+                $newCollection->add(
+                    [$resultCollection[$i] => $resultCollection[0]]
+
+                );
+            } else {
+                $newCollection->add(
+                    [$resultCollection[$i] => $resultCollection[$i +1]]
+
+                );
+            }
+        }
+
+
+        return $newCollection;
     }
 }
