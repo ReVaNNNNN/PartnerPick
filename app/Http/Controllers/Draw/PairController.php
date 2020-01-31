@@ -59,22 +59,10 @@ class PairController extends Controller
     public function draw(PairRequest $request): View
     {
         try {
-            // REFAKTOR
-            $names = $request->get('names');
+            $names = $request->get('names'); // Walidacja - muszą być co najmniej 3 imiona
+            $drawId = $this->storeDraw()->getId();
 
-            $draw = new Draw();
-            $draw->setType(Draw::TYPE_PAIR);
-            $draw->save();
-            $drawId= $draw->getId();
-
-            foreach ($names as $name) {
-                $person = new DrawPerson();
-                $person->setName($name);
-                $person->setDrawId($drawId);
-                $person->save();
-            }
-
-
+            $this->storePersons($names, $drawId);
             $pairDTO = $this->factory->create($names, $drawId);
 
             $this->drawer->completeDrawData($pairDTO);
@@ -86,8 +74,30 @@ class PairController extends Controller
         return view('content.pair')->with(['result', $this->drawer->getResult()]);
     }
 
-    public function result()
+    /**
+     * @return Draw
+     * @throws \Exception
+     */
+    private function storeDraw(): Draw
     {
+        $draw = new Draw();
+        $draw->setType(Draw::TYPE_PAIR);
+        $draw->save();
 
+        return $draw;
+    }
+
+    /**
+     * @param array $names
+     * @param int $drawId
+     */
+    private function storePersons(array  $names, int $drawId): void
+    {
+        foreach ($names as $name) {
+            $person = new DrawPerson();
+            $person->setName($name);
+            $person->setDrawId($drawId);
+            $person->save();
+        }
     }
 }

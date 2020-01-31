@@ -23,20 +23,8 @@ class Pair implements DrawAlgorithmInterface
      */
     public function draw(): DrawResult
     {
-        // REFAKTOR
-        $names = $this->names;
-        $result = new DrawResult();
-        $resultCollection = new Collection();
-        shuffle($names);
-
-        while ($names) {
-            $drawedName = array_pop($names);
-            $resultCollection->add($drawedName);
-        }
-
-        $result->result = $this->formatResult($resultCollection);
-        $result->draw_id = $this->draw_id;
-        $result->save();
+        $resultCollection = $this->makeDrawing();
+        $result = $this->storeResult($resultCollection);
 
         return $result;
     }
@@ -53,11 +41,59 @@ class Pair implements DrawAlgorithmInterface
         return $this;
     }
 
-    private function formatResult(Collection $resultCollection): Collection
+    /**
+     * @return Collection
+     */
+    private function makeDrawing(): Collection
     {
-        //@todo zformatowanie wyniku w taki sposób aby dane były uporządkowane w tablicy
-        // według par osoba1: osoba3, osoba2:osoba1, osoba3:osoba2 itp
+        $names = $this->names;
+        $resultCollection = new Collection();
+        shuffle($names);
+
+        while ($names) {
+            $drawedName = array_pop($names);
+            $resultCollection->add($drawedName);
+        }
 
         return $resultCollection;
+    }
+
+    /**
+     * @param Collection $resultCollection
+     * @return DrawResult
+     */
+    private function storeResult(Collection $resultCollection): DrawResult
+    {
+        $result = new DrawResult();
+        $result->result = $this->formatResult($resultCollection);
+        $result->draw_id = $this->draw_id;
+        $result->save();
+
+        return $result;
+    }
+
+    private function formatResult(Collection $resultCollection): Collection
+    {
+        //@todo Refaktor
+
+        $newCollection = new Collection();
+        $size = $resultCollection->count();
+
+        for ($i = 0; $i < $size; $i++) {
+            if (($size - 1) === $i) {
+                $newCollection->add(
+                    [$resultCollection[$i] => $resultCollection[0]]
+
+                );
+            } else {
+                $newCollection->add(
+                    [$resultCollection[$i] => $resultCollection[$i +1]]
+
+                );
+            }
+        }
+
+
+        return $newCollection;
     }
 }
