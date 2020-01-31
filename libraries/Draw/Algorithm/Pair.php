@@ -23,20 +23,8 @@ class Pair implements DrawAlgorithmInterface
      */
     public function draw(): DrawResult
     {
-        // REFAKTOR
-        $names = $this->names;
-        $result = new DrawResult();
-        $resultCollection = new Collection();
-        shuffle($names);
-
-        while ($names) {
-            $drawedName = array_pop($names);
-            $resultCollection->add($drawedName);
-        }
-
-        $result->result = $this->formatResult($resultCollection);
-        $result->draw_id = $this->draw_id;
-        $result->save();
+        $resultCollection = $this->makeDrawing();
+        $result = $this->storeResult($resultCollection);
 
         return $result;
     }
@@ -51,6 +39,37 @@ class Pair implements DrawAlgorithmInterface
         $this->draw_id = $dto->getDrawId();
 
         return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    private function makeDrawing(): Collection
+    {
+        $names = $this->names;
+        $resultCollection = new Collection();
+        shuffle($names);
+
+        while ($names) {
+            $drawedName = array_pop($names);
+            $resultCollection->add($drawedName);
+        }
+
+        return $resultCollection;
+    }
+
+    /**
+     * @param Collection $resultCollection
+     * @return DrawResult
+     */
+    private function storeResult(Collection $resultCollection): DrawResult
+    {
+        $result = new DrawResult();
+        $result->result = $this->formatResult($resultCollection);
+        $result->draw_id = $this->draw_id;
+        $result->save();
+
+        return $result;
     }
 
     private function formatResult(Collection $resultCollection): Collection
