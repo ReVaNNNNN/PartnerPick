@@ -23,8 +23,8 @@ class Pair implements DrawAlgorithmInterface
      */
     public function draw(): DrawResult
     {
-        $resultCollection = $this->makeDrawing();
-        $result = $this->storeResult($resultCollection);
+        $namesCollection = $this->makeDrawing();
+        $result = $this->storeResult($namesCollection);
 
         return $result;
     }
@@ -47,53 +47,77 @@ class Pair implements DrawAlgorithmInterface
     private function makeDrawing(): Collection
     {
         $names = $this->names;
-        $resultCollection = new Collection();
+        $namesCollection = new Collection();
         shuffle($names);
 
         while ($names) {
             $drawedName = array_pop($names);
-            $resultCollection->add($drawedName);
+            $namesCollection->add($drawedName);
         }
 
-        return $resultCollection;
+        return $namesCollection;
     }
 
     /**
-     * @param Collection $resultCollection
+     * @param Collection $namesCollection
      * @return DrawResult
      */
-    private function storeResult(Collection $resultCollection): DrawResult
+    private function storeResult(Collection $namesCollection): DrawResult
     {
         $result = new DrawResult();
-        $result->result = $this->formatResult($resultCollection);
+        $result->result = $this->formatResult($namesCollection);
         $result->draw_id = $this->draw_id;
         $result->save();
 
         return $result;
     }
 
-    private function formatResult(Collection $resultCollection): Collection
+    /**
+     * @param Collection $namesCollection
+     * @return Collection
+     */
+    private function formatResult(Collection $namesCollection): Collection
     {
-        //@todo Refaktor
+        $resultCollection = new Collection();
 
-        $newCollection = new Collection();
-        $size = $resultCollection->count();
-
-        for ($i = 0; $i < $size; $i++) {
-            if (($size - 1) === $i) {
-                $newCollection->add(
-                    [$resultCollection[$i] => $resultCollection[0]]
-
-                );
+        foreach ($namesCollection as $key => $name) {
+            if ($namesCollection->last() !== $name) {
+                $this->assignPerson($resultCollection, $namesCollection, $key);
             } else {
-                $newCollection->add(
-                    [$resultCollection[$i] => $resultCollection[$i +1]]
-
-                );
+                $this->assignLastPerson($resultCollection, $namesCollection);
             }
         }
 
 
-        return $newCollection;
+        return $resultCollection;
+    }
+
+    /**
+     * @param Collection $resultCollection
+     * @param Collection $namesCollection
+     * @param int $key
+     * @return void
+     */
+    private function assignPerson(Collection &$resultCollection, Collection $namesCollection, int $key): void
+    {
+        $resultCollection->add(
+            [
+                $namesCollection[$key] => $namesCollection[$key + 1]
+            ]
+        );
+    }
+
+    /**
+     * @param Collection $resultCollection
+     * @param Collection $namesCollection
+     * @return void
+     */
+    private function assignLastPerson(Collection &$resultCollection, Collection $namesCollection): void
+    {
+        $resultCollection->add(
+            [
+                $namesCollection->last() => $namesCollection->first()
+            ]
+        );
     }
 }

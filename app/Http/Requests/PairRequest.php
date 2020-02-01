@@ -24,7 +24,18 @@ class PairRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'names' => 'required|array|min:3'
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+          'names.required' => 'Person names are required',
+          'names.min' => 'You need to add minimum 3 names to make a draw'
         ];
     }
 }
