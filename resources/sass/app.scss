@@ -196,6 +196,11 @@ a.nav-link.lang.lang-active {
     .cover-container {
         width: 100%; /* Must be percentage or pixels for horizontal alignment */
     }
+
+    .cover-heading {
+        margin-top: -25%;
+        margin-bottom: 20%;
+    }
 }
 
 @media (min-width: 62em) {
