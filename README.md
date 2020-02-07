@@ -13,7 +13,7 @@ By the way, I will want to teach some interesting things :)
 
 ## Contributing
 
-Dont't be afraid to make a suggestion or improvement !
+Dont't be afraid to make a suggestion or improvement :)
 
 ## License
 
