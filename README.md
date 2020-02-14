@@ -5,16 +5,16 @@
     <span>State: In progress</span>
 </p>
 
-## About project
+## About project:
 
 This project is created to make it easier for people to draw partners for games, plays and various other situations.
-By the way, I will want to teach some interesting things :)
+By the way, I want to teach some interesting things :)
 
 
-## Contributing
+## Contributing:
 
-Dont't be afraid to make a suggestion or improvement :)
+Dont't be afraid to make a suggestion or improvement.
 
-## License
+## License:
 
 The project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
