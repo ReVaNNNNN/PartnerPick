@@ -1,38 +1,46 @@
 @extends('layout')
 @section('content')
-    <h1 class="cover-heading">PAIR</h1>
+    <h1 class="cover-heading">@lang('draw_pair_content.draw_name')</h1>
     <div class="inner cover">
-        {{--  Dodanie selecta z wyborem sposobu wyświetalania wyników ?    - panel boczny ?      --}}
         <div class="container">
             <div class="row">
                 <div class="col-8">
-                    <h4 class="description">Add names:</h4>
+                    <h4 class="description">@lang('draw_pair_content.add_names'):</h4>
                     <br>
                     <div class="form-group">
-                        <label for="name-btn">Give name to draw:</label>
-                            <input type="text" class="form-control" id="name-btn" placeholder="Name" minlength="2">
-                            <span style="color: indianred" class="name-error">Name should cantain at least 2 letter.</span>
+                        <label for="name-btn">@lang('draw_pair_content.give_name'):</label>
+                            <input type="text" class="form-control" id="name-btn" placeholder="Name" minlength="2" autofocus>
+                            <span style="color: indianred" class="name-error">@lang('draw_pair_content.name_too_short').</span>
                     </div>
-                    <button class="btn-my-primary add-name-btn">Add</button>
+                    <button class="btn-my-primary add-name-btn">@lang('draw_pair_content.button_add')</button>
                     <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>
+                                <input type="radio" name="print-type" value="show-all"> @lang('draw_pair_content.show_all_results')
+                            </label>
+                        </div>
+                        <div class="col-6">
+                            <label>
+                                <input type="radio" name="print-type" value="one-by-one"> @lang('draw_pair_content.show_one_by_one')
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-4">
-                    <h4>Names: </h4>
+                    <h4>@lang('draw_pair_content.list_names'): </h4>
                     <br>
                     <ul class="name-list">
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <label>
-                    <input type="radio" name="print-type" value="show-all"> Show All Result
-                </label>
-                <label>
-                    <input type="radio" name="print-type" value="one-by-one"> Show one by one
-                </label>
-            </div>
-            <div class="row">
-                <button class="btn-my-primary draw-btn">Draw</button>
+            <br>
+            <br>
+            <div class="row ">
+                <div class="col text-center">
+                    <button class="btn-my-primary draw-btn ">@lang('draw_pair_content.button_draw')</button>
+                </div>
             </div>
         </div>
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,13 +53,23 @@
                 }
             });
 
+            //Press enter on name input
+            $("#name-btn").keypress(function(event) {
+                if (event.keyCode === 13) {
+                    $(".add-name-btn").click();
+                }
+            });
+
             $('.name-error').hide();
             //Add name
             $('.add-name-btn').click(function (event) {
                 event.preventDefault();
 
                 let nameInput = $('#name-btn');
-                let listItem = '<li class="name-item">' + nameInput.val() + '<button style="background-color: crimson" class="btn-secondary remove-name-btn">x</button></li>';
+                let listItem = '<li class="name-item">'
+                    + nameInput.val()
+                    + '<button style="color: crimson" class="close remove-name-btn">' +
+                    '<span aria-hidden="true">&times;</span></button></li>';
                 let errorText = $('.name-error');
 
                 //Validation
