@@ -5,11 +5,10 @@
     <span>State: In progress</span>
 </p>
 
-## About project:
+## About:
 
 This project is created to make it easier for people to draw partners for games, plays and various other situations.
 By the way, I want to teach some interesting things :)
-
 
 ## Contributing:
 
