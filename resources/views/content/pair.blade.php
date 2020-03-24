@@ -12,19 +12,10 @@
                             <input type="text" class="form-control" id="name-btn" placeholder="Name" minlength="2" autofocus>
                             <span style="color: indianred" class="name-error">@lang('draw_pair_content.name_too_short').</span>
                     </div>
-                    <button class="btn-my-primary add-name-btn">@lang('draw_pair_content.button_add')</button>
-                    <br>
-                    <br>
                     <div class="row">
-                        <div class="col-6">
-                            <label>
-                                <input type="radio" name="print-type" value="show-all"> @lang('draw_pair_content.show_all_results')
-                            </label>
-                        </div>
-                        <div class="col-6">
-                            <label>
-                                <input type="radio" name="print-type" value="one-by-one"> @lang('draw_pair_content.show_one_by_one')
-                            </label>
+                        <div class="col text-center">
+                            <button class="btn-my-primary add-name-btn">@lang('draw_pair_content.button_add')</button>
+                            <button class="btn-my-primary draw-btn ">@lang('draw_pair_content.button_draw')</button>
                         </div>
                     </div>
                 </div>
@@ -33,13 +24,6 @@
                     <br>
                     <ul class="name-list">
                     </ul>
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="row ">
-                <div class="col text-center">
-                    <button class="btn-my-primary draw-btn ">@lang('draw_pair_content.button_draw')</button>
                 </div>
             </div>
         </div>
@@ -116,7 +100,7 @@
                         names: names,
                     },
                     success: function (response) {
-                        console.log('Sukces');
+                        window.location.replace("{{ route('pair-result') }}");
                     }
                 });
             });

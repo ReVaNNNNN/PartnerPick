@@ -35,6 +35,9 @@ class Drawer implements DrawerInterface
         $this->algorithm = $algorithm;
     }
 
+    /**
+     * @return DrawResult
+     */
     public function getResult(): DrawResult
     {
         return $this->algorithm->setUpData($this->data)->draw();
