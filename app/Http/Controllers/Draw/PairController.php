@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PairRequest;
 use App\Models\Draw;
 use App\Models\DrawPerson;
+use App\Models\DrawResult;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
@@ -27,6 +28,10 @@ class PairController extends Controller
      * @var DrawAlgorithmInterface
      */
     protected $algorithm;
+    /**
+     * @var DrawResult
+     */
+    protected $result;
 
     /**
      * PairController constructor.
@@ -53,10 +58,9 @@ class PairController extends Controller
     /**
      * @param PairRequest $request
      *
-     * @return View
      * @throws \Exception
      */
-    public function draw(PairRequest $request): View
+    public function draw(PairRequest $request)
     {
         try {
             $names = $request->get('names');
@@ -67,11 +71,18 @@ class PairController extends Controller
 
             $this->drawer->completeDrawData($pairDTO);
             $this->drawer->setUpAlgorithm($this->algorithm);
+            $this->result = $this->drawer->getResult()->result;
         } catch (\Exception $e) {
             Log::log(LogLevel::ERROR, $e->getMessage());
         }
+    }
 
-        return view('content.pair')->with(['result', $this->drawer->getResult()]);
+    /**
+     * @return View
+     */
+    public function result(): View
+    {
+        return view('content.pair_result', ['drawResult', $this->result]);
     }
 
     /**
