@@ -5,7 +5,10 @@
         <div class="container">
             <div class="row">
                 <ul>
-{{--            DANE SIĘ TO NIE PRZEKAZUJA Z METO RESULT()   + CSS SIE NIE ŁADUJĄ W TYM WIDOKU     --}}
+            {{-- DANE SA CHYBA POD INNA ZMIENNA PRZEKAZYWANE - ZDEBUGOWAC }}--}}
+            {{-- REFACTOR CALEGO ALOGRYTM I PRZEKAZYWANI DANYCH MIEDZY PHP A AJAX
+            + CSS SIE NIE ŁADUJĄ W TYM WIDOKU     --}}
+            {{--  OSTYLOWANIE WYNIKOW LOSOWANIA --}}
                 @foreach($drawResult as $res)
                     <li>{{$res}}</li>
                 @endforeach

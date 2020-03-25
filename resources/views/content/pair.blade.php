@@ -100,7 +100,7 @@
                         names: names,
                     },
                     success: function (response) {
-                        window.location.replace("{{ route('pair-result') }}");
+                        window.location.replace("{{ route('pair-result') }}" + '?id=' + response);
                     }
                 });
             });

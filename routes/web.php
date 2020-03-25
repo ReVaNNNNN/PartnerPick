@@ -19,7 +19,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('home');
 Route::get('/locale/{locale}', 'LocaleController@index');
 
 Route::get('/test', 'TestController@index');

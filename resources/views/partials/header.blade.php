@@ -1,7 +1,7 @@
 <div class="masthead clearfix">
     <div class="inner">
         <h3 class="masthead-brand">
-            {{  config('app.name') }}
+            <a href="{{ route('home') }}">{{  config('app.name') }}</a>
         </h3>
 
         <nav class="nav nav-masthead">
