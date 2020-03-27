@@ -90,7 +90,7 @@ class PairController extends Controller
         $drawResultId =  $request->get('id');
         $drawResult = DrawResult::find($drawResultId);
 
-        return view('content.pair_result', ['drawResult', $drawResult->getResult()]);
+        return view('content.pair_result')->with('results', json_decode($drawResult->getResult()));
     }
 
     /**

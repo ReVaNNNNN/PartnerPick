@@ -5,12 +5,14 @@
         <div class="container">
             <div class="row">
                 <ul>
-            {{-- DANE SA CHYBA POD INNA ZMIENNA PRZEKAZYWANE - ZDEBUGOWAC }}--}}
+            {{-- NIEDODAWANIE PLUSA (który jest x'em) DO LOSOWANYCH IMION}}--}}
             {{-- REFACTOR CALEGO ALOGRYTM I PRZEKAZYWANI DANYCH MIEDZY PHP A AJAX
             + CSS SIE NIE ŁADUJĄ W TYM WIDOKU     --}}
             {{--  OSTYLOWANIE WYNIKOW LOSOWANIA --}}
-                @foreach($drawResult as $res)
-                    <li>{{$res}}</li>
+{{--            @php(dd($results))--}}
+{{--            @endphp--}}
+                @foreach($results as $result)
+                    <li>{{$result}}</li>
                 @endforeach
                 </ul>
             </div>
