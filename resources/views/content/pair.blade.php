@@ -51,9 +51,11 @@
 
                 let nameInput = $('#name-btn');
                 let listItem = '<li class="name-item">'
-                    + nameInput.val() + '</li>'
+                    + nameInput.val()
+                    + '</li>'
                     + '<button style="color: crimson" class="close remove-name-btn">'
-                    + '<span aria-hidden="true">&times;</span></button>';
+                    + '<span aria-hidden="true">&times;</span><'
+                    + '/button>';
 
                 let errorText = $('.name-error');
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int id
- * @property string result
+ * @property result
  */
 class DrawResult extends Model
 {
@@ -30,9 +30,9 @@ class DrawResult extends Model
     }
 
     /**
-     * @return string
+     * @return
      */
-    public function getResult(): string
+    public function getResult()
     {
         return $this->result;
     }

@@ -5,14 +5,18 @@
         <div class="container">
             <div class="row">
                 <ul>
-            {{-- NIEDODAWANIE PLUSA (który jest x'em) DO LOSOWANYCH IMION}}--}}
             {{-- REFACTOR CALEGO ALOGRYTM I PRZEKAZYWANI DANYCH MIEDZY PHP A AJAX
+            X zle ostylowany w liście imion
             + CSS SIE NIE ŁADUJĄ W TYM WIDOKU     --}}
             {{--  OSTYLOWANIE WYNIKOW LOSOWANIA --}}
-{{--            @php(dd($results))--}}
-{{--            @endphp--}}
+            <?php //dd($results)
+            ?>
+{{--                    @php var_dump($results)--}}
+{{--                    @endphp--}}
                 @foreach($results as $result)
-                    <li>{{$result}}</li>
+                        <li>{{key($result)}}</li>
+                        <li>{{$result[key($result)]}}</li>
+                        <br>
                 @endforeach
                 </ul>
             </div>
