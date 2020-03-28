@@ -89,8 +89,8 @@ class PairController extends Controller
     {
         $drawResultId =  $request->get('id');
         $drawResult = DrawResult::find($drawResultId);
-
-        return view('content.pair_result')->with('results', json_decode($drawResult->getResult()));
+        // dd(json_decode($drawResult->getResult()));
+        return view('content.pair_result')->with('results', json_decode($drawResult->getResult(), true));
     }
 
     /**
@@ -110,7 +110,7 @@ class PairController extends Controller
      * @param array $names
      * @param int $drawId
      */
-    private function storePersons(array  $names, int $drawId): void
+    private function storePersons(array $names, int $drawId): void
     {
         foreach ($names as $name) {
             $person = new DrawPerson();
@@ -119,4 +119,16 @@ class PairController extends Controller
             $person->save();
         }
     }
+
+    /**
+     * @param array $names
+     * @return array
+     */
+    // private function filterNames(array $names): array
+    // {
+    //     foreach ($names as &$name) {
+    //         substr_replace($name ,"",-1);
+    //     }
+    //     return $names;
+    // }
 }
