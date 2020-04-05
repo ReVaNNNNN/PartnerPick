@@ -8,8 +8,9 @@ use App\Models\Draw;
 use App\Models\DrawPerson;
 use App\Models\DrawResult;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Libraries\Draw\Algorithm\DrawAlgorithmInterface;
 use Libraries\Draw\Factory\DrawFactoryInterface;
@@ -67,7 +68,6 @@ class PairController extends Controller
         try {
             $names = $request->get('names');
             $drawId = $this->storeDraw()->getId();
-
             $this->storePersons($names, $drawId);
             $pairDTO = $this->factory->create($names, $drawId);
 
@@ -76,7 +76,8 @@ class PairController extends Controller
         } catch (\Exception $e) {
             Log::log(LogLevel::ERROR, $e->getMessage());
 
-            return response()->exception;
+            Session::flash('message', "Special message goes here");
+            return Redirect::back();
         }
 
         return response()->json($this->drawer->getResult()->getId());
@@ -119,16 +120,4 @@ class PairController extends Controller
             $person->save();
         }
     }
-
-    /**
-     * @param array $names
-     * @return array
-     */
-    // private function filterNames(array $names): array
-    // {
-    //     foreach ($names as &$name) {
-    //         substr_replace($name ,"",-1);
-    //     }
-    //     return $names;
-    // }
 }
