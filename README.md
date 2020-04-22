@@ -1,7 +1,7 @@
 # PartnerPick
-    <span>Version: 1.0.5</span>
-    <br>
-    <span>State: In progress</span>
+Version: 1.0.5
+<br>
+State: In progress
 
 ## About:
 
