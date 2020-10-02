@@ -6,7 +6,7 @@ State: In progress
 ## About:
 
 This project is created to make it easier for people to draw partners for games, plays and various other situations.
-By the way, I want to teach some interesting things :)
+By the way, I would like to learn some interesting things :)
 
 ## Contributing:
 
