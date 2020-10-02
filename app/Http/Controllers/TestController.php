@@ -18,12 +18,6 @@ class TestController extends Controller
 //        $personOne = new DrawPerson();
 //        $personOne->name = 'Kamil';
 //        $personOne->draw_id = $draw->getId();
-//        $personOne->save();
-//
-//        $personTwo = new DrawPerson();
-//        $personTwo->name = 'Jakub';
-//        $personTwo->draw_id = $draw->getId();
-//        $personTwo->save();
 
         $draw = Draw::find(1);
 
