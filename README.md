@@ -11,6 +11,3 @@ By the way, I would like to learn some interesting things :)
 ## Contributing:
 
 Dont't be afraid to make a suggestion or improvement.
-## License:
-
-The project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
