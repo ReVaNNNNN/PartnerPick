@@ -1,7 +1,7 @@
 # PartnerPick
 Version: 1.0.7
 <br>
-State: In progress
+State: Stopped
 
 ## About:
 
