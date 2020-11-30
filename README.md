@@ -1,5 +1,5 @@
 # PartnerPick
-Version: 1.0.3v
+Version: 1.0.4
 State: Stopped
 
 ## About:
